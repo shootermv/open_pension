@@ -1,4 +1,4 @@
-FROM python:3-onbuild
+FROM python:3.6.3-alpine3.6
 MAINTAINER Nir Galon <nir@galon.io>
 
 RUN useradd --user-group --create-home --shell /bin/false app

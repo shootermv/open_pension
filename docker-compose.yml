@@ -17,7 +17,7 @@ services:
         constraints: [node.role == manager]
 
   database:
-    image: postgres
+    image: postgres:9.6.6-alpine
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=Zaq12345
