@@ -131,7 +131,7 @@ LOGGING = {
         'file': {
             'level': LOG_LEVEL,
             'class': 'logging.FileHandler',
-            'filename': '/home/app/server/logs/django.log',
+            'filename': os.path.join(BASE_DIR, 'django.log'),
         },
     },
     'loggers': {
