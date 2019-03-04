@@ -3,3 +3,6 @@ encryptedDockerUser: KIOtjMa+xwGxg62BZH6i95xN1aKvzaDX2jxdvi76UruMjlTxgEf7i2k+dU0
 selfDeployKeyDecryptCmd: openssl aes-256-cbc -K $encrypted_3a25b31f1ad6_key -iv $encrypted_3a25b31f1ad6_iv
   -in .travis_ci_operator_self_github_deploy_key.id_rsa.enc -out .travis_ci_operator_self_github_deploy_key.id_rsa
   -d
+versysDeployKeyDecryptCmd: openssl aes-256-cbc -K $encrypted_e3ba996d2351_key -iv
+  $encrypted_e3ba996d2351_iv -in .travis_ci_operator_versys_github_deploy_key.id_rsa.enc
+  -out .travis_ci_operator_versys_github_deploy_key.id_rsa -d
