@@ -66,6 +66,23 @@ script:
   - docker-compose -f docker-compose.yml -f docker-compose.prod.yml exec server coverage xml
   - docker-compose -f docker-compose.yml -f docker-compose.prod.yml exec server pycodestyle --show-source --max-line-length=120 --exclude=pension/migrations --show-pep8 .
   - docker-compose -f docker-compose.yml -f docker-compose.prod.yml exec server isort . --recursive --check-only
+- docker
+install:
+- curl -L https://raw.githubusercontent.com/OriHoch/travis-ci-operator/master/travis_ci_operator.sh > $HOME/bin/travis_ci_operator.sh
+- bash $HOME/bin/travis_ci_operator.sh init
+- travis_ci_operator.sh docker-login
+- docker build -t hasadna/open_pension:latest .
+- travis_ci_operator.sh github-update self master "echo foo > bar; git add bar" "testing github self update"
+- travis_ci_operator.sh github-update github-yaml-updater master "echo foo > bar; git add bar" "testing travis-ci-operator" OriHoch/github-yaml-updater
+- travis_ci_operator.sh github-yaml-update self master test.yaml '{"foo":"bar"}' "testing github yaml update"
+- travis_ci_operator.sh github-yaml-update github-yaml-updater master test.yaml '{"foo":"bar"}' "testing travis-ci-operator github yaml update" OriHoch/github-yaml-updater
 
 after_script:
   - cd /home/travis/build/hasadna/open_pension && codecov -t 4e44efc7-43b7-42e3-a122-4042d83e19ff
+
+deploy:
+  provider: script
+  script: docker push hasadna/open_pension:latest
+  on:
+    branch: master
+    condition: $TRAVIS_TAG = "" && $TRAVIS_PULL_REQUEST = "false"
