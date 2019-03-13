@@ -62,8 +62,8 @@ install:
   - travis_ci_operator.sh docker-login
 script:
   # Client
-  - cd /home/travis/build/hasadna/open_pension/client
- # - npm run lint
+  #- cd /home/travis/build/hasadna/open_pension/client
+  #- npm run lint
   #- npm run test
   #- npm run e2e
 
