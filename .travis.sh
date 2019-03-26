@@ -25,7 +25,7 @@ elif [ "${1}" == "deploy" ]; then
         docker push ${DOCKER_IMAGE_SERVER}:latest &&\
         docker push ${DOCKER_IMAGE_SERVER}:${TRAVIS_COMMIT} &&\        
         travis_ci_operator.sh github-yaml-update \
-            versys master values.auto-updated.yaml '{"openpension":{"client": {"image": "'${DOCKER_IMAGE_CLIENT}:${TRAVIS_COMMIT}'"}},{"server": {"image": "'${DOCKER_IMAGE_SERVER}:${TRAVIS_COMMIT}'"}}}' \
+            z900 master values.auto-updated.yaml '{"openpension":{"client": {"image": "'${DOCKER_IMAGE_CLIENT}:${TRAVIS_COMMIT}'"}},{"server": {"image": "'${DOCKER_IMAGE_SERVER}:${TRAVIS_COMMIT}'"}}}' \
             "automatic update of openpension" shootermv/hasadna-k8s &&\
         echo &&\
         echo Great Success &&\
