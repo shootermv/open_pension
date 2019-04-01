@@ -1,21 +1,4 @@
-if [ "${1}" == "install" ]; then
-    # python3 -m pip install \
-    #     jupyter jupyterlab ipython \
-    #     plyvel psycopg2 datapackage-pipelines-elasticsearch \
-    #     'https://github.com/OriHoch/dataflows/archive/specify-encoding-for-load.zip#egg=dataflows[speedup]' \
-    #     'https://github.com/frictionlessdata/datapackage-pipelines/archive/2.0.0.zip#egg=datapackage-pipelines[speedup]' &&\
-    # python3 -m pip install -e .
-    python3 -m pip install PyYAML
-    echo installed
-
-elif [ "${1}" == "script" ]; then
-    docker pull ${DOCKER_IMAGE}:latest
-    docker build -t ${DOCKER_IMAGE_CLIENT}:latest -t ${DOCKER_IMAGE_CLIENT}:${TRAVIS_COMMIT} --cache-from ${DOCKER_IMAGE_CLIENT}:latest .
-    docker build -t ${DOCKER_IMAGE_SERVER}:latest -t ${DOCKER_IMAGE_SERVER}:${TRAVIS_COMMIT} --cache-from ${DOCKER_IMAGE_SERVER}:latest .
-
-    # ./render_notebook.sh QUICKSTART
-
-elif [ "${1}" == "deploy" ]; then
+if [ "${1}" == "deploy" ]; then
     if [ "${TRAVIS_BRANCH}" == "master" ] &&\
        [ "${TRAVIS_TAG}" == "" ] &&\
        [ "${TRAVIS_PULL_REQUEST}" == "false" ]

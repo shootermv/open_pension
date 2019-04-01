@@ -71,9 +71,10 @@ script:
   #- docker-compose -f docker-compose.yml -f docker-compose.prod.yml exec server coverage xml
   #- docker-compose -f docker-compose.yml -f docker-compose.prod.yml exec server pycodestyle --show-source --max-line-length=120 --exclude=pension/migrations --show-pep8 .
   #- docker-compose -f docker-compose.yml -f docker-compose.prod.yml exec server isort . --recursive --check-only
-
-  - docker build -t hasadna/open-pension-server:latest ./server
-  - docker build -t hasadna/open-pension-client:latest ./client
+  - docker pull hasadna/open-pension-server:latest
+  - docker build --cache-from hasadna/open-pension-server:latest  -t hasadna/open-pension-server:latest ./server
+  - docker pull hasadna/open-pension-client:latest
+  - docker build --cache-from hasadna/open-pension-client:latest -t hasadna/open-pension-client:latest ./client
 
 after_script:
   - cd /home/travis/build/hasadna/open_pension && codecov -t 4e44efc7-43b7-42e3-a122-4042d83e19ff
