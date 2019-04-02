@@ -59,6 +59,7 @@ install:
   - bash $HOME/bin/travis_ci_operator.sh init
   - travis_ci_operator.sh docker-login
   - python2 -m pip install pyyaml
+  - python3 -m pip install yaml
 script:
   # Client
   #- cd /home/travis/build/hasadna/open_pension/client
